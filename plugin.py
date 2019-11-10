@@ -86,10 +86,19 @@ class BasePlugin:
         # Validate parameters
         # Images
         # Check if images are in database
-        if "xfrpimonitor" not in Images:
-            Domoticz.Image("xfrpimonitor.zip").Create()
-        image = Images["xfrpimonitor"].ID
-        Domoticz.Debug("Image created. ID: "+str(image))
+        #if "xfrpimonitor" not in Images:
+        #    Domoticz.Image("xfrpimonitor.zip").Create()
+        #image = Images["xfrpimonitor"].ID
+        #Domoticz.Debug("Image created. ID: "+str(image))
+       # Create devices
+        if len(Devices) == 0:
+            for unit in self.__UNITS:
+                Domoticz.Device(Unit=unit[0],
+                                Name=unit[1],
+                                Type=unit[2],
+                                Subtype=unit[3],
+                                Options=unit[4],
+                                Used=unit[5]).Create()
         #connect to server
 
         host = Parameters["Address"]
